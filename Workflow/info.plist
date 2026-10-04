@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.iali.timeprogress</string>
+	<key>connections</key>
+	<dict/>
+	<key>createdby</key>
+	<string>iAli</string>
+	<key>description</key>
+	<string>Check your time progress at a glance</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Time Progress</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>{var:keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>function run() {
+    const now = new Date();
+
+    const startOfDay = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+    );
+
+    const startOfMonth = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+    );
+
+    const startOfQuarter = new Date(
+        now.getFullYear(),
+        Math.floor(now.getMonth() / 3) * 3,
+        1
+    );
+
+    const startOfYear = new Date(
+        now.getFullYear(),
+        0,
+        1
+    );
+
+    const nextDay = new Date(startOfDay);
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    const nextMonth = new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        1
+    );
+
+    const nextQuarter = new Date(
+        now.getFullYear(),
+        Math.floor(now.getMonth() / 3) * 3 + 3,
+        1
+    );
+
+    const nextYear = new Date(
+        now.getFullYear() + 1,
+        0,
+        1
+    );
+
+    function progress(start, end) {
+        const percent = Math.floor(
+            ((now - start) / (end - start)) * 100
+        );
+
+        const filled = Math.floor(percent / 10);
+
+        return "■".repeat(filled) +
+               "□".repeat(10 - filled) +
+               ` ${percent}%`;
+    }
+
+    const items = [
+        {
+            title: `Day: ${progress(startOfDay, nextDay)}`
+        },
+        {
+            title: `Month: ${progress(startOfMonth, nextMonth)}`
+        },
+        {
+            title: `Quarter: ${progress(startOfQuarter, nextQuarter)}`
+        },
+        {
+            title: `Year: ${progress(startOfYear, nextYear)}`
+        }
+    ];
+
+    return JSON.stringify({ items });
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>My Time Progress</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>AF9087B8-1F6A-43CA-A202-F54341C2DB29</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Time Progress
+
+Check your day, month, quarter, and year progress via the `mytime` keyword.
+
+---
+
+⭐ If you find it useful, give it a [star on GitHub](https://github.com/iAli/time-progress-workflow)</string>
+	<key>uidata</key>
+	<dict>
+		<key>AF9087B8-1F6A-43CA-A202-F54341C2DB29</key>
+		<dict>
+			<key>xpos</key>
+			<real>65</real>
+			<key>ypos</key>
+			<real>25</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>mytime</string>
+				<key>placeholder</key>
+				<string>mytime</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>26.1</string>
+	<key>webaddress</key>
+	<string>https://github.com/iAli/time-progress-workflow</string>
+</dict>
+</plist>
